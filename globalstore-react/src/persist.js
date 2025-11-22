@@ -27,7 +27,17 @@ export const persist = (createState, options) => {
       storage.setItem(name, stateToSave);
     };
 
+    const savedState = storage.getItem(name);
+
     const initialState = createState(wrappedSet, get);
+
+    if (savedState) {
+      Object.keys(savedState).forEach((key) => {
+        if (typeof initialState[key] !== 'function') {
+          initialState[key] = savedState[key];
+        }
+      });
+    }
 
     return initialState;
   };

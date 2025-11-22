@@ -7,6 +7,7 @@ export const store = create(
   persist(
     (set, get) => ({
       count: 0,
+      count2: 100,
       increase: () => set((state) => ({ ...state, count: state.count + 1 })),
       decrease: () => set((state) => ({ ...state, count: state.count - 1 })),
     }),
