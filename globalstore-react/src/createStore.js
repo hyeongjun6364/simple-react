@@ -1,5 +1,6 @@
-export const createStore = (createState) => {
+export const create = (createState) => {
   let state = createState;
+
   const listeners = new Set();
   const getState = () => state;
 
