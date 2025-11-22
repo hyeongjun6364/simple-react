@@ -1,7 +1,7 @@
-import { create } from './createStore';
+import { create } from './core/createStore';
 import InnerComponent from './InnerComponent';
-import { createJSONStorage, persist } from './persist';
-import { makeStoreHook } from './useStore';
+import { createJSONStorage, persist } from './core/persist';
+import { makeStoreHook } from './core/useStore';
 
 export const store = create(
   persist(
