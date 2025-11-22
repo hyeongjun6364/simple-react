@@ -1,13 +1,12 @@
-import { store } from './App';
-import { useStore } from './useStore';
+import { useStore } from './App';
 
 function InnerComponent() {
-  const state = useStore(store);
+  const count2 = useStore((state) => state.count2);
 
   return (
     <div>
       <h1>InnerComponent</h1>
-      <h2>count: {state.count}</h2>
+      <h2>count2: {count2}</h2>
     </div>
   );
 }

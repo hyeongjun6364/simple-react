@@ -1,5 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
-export function useStore(store) {
-  return useSyncExternalStore(store.subscribe, store.getState);
+export function makeStoreHook(store) {
+  return function useStore(selector = (state) => state) {
+    return useSyncExternalStore(store.subscribe, () => selector(store.getState()));
+  };
 }

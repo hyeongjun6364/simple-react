@@ -1,9 +1,10 @@
 import { createStore } from './createStore';
 import InnerComponent from './InnerComponent';
-import { useStore } from './useStore';
+import { makeStoreHook } from './useStore';
 
 export const store = createStore((set) => ({
   count: 0,
+  count2: 100,
   increase: () => {
     set((state) => ({ ...state, count: state.count + 1 }));
   },
@@ -12,13 +13,17 @@ export const store = createStore((set) => ({
   },
 }));
 
+export const useStore = makeStoreHook(store);
+
 function App() {
-  const state = useStore(store);
+  const count = useStore((state) => state.count);
+  const increase = useStore((state) => state.increase);
+  const decrease = useStore((state) => state.decrease);
   return (
     <div className="App">
-      <h1>Count: {state.count}</h1>
-      <button onClick={state.increase}>Increase</button>
-      <button onClick={state.decrease}>Decrease</button>
+      <h1>Count: {count}</h1>
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease}>Decrease</button>
       <InnerComponent />
     </div>
   );

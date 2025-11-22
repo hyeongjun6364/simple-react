@@ -18,6 +18,7 @@ export const createStore = (createState) => {
     //이벤트 전파
     listeners.forEach((listener) => listener(state));
   };
+
   state = createState(setState, getState);
 
   return { getState, setState, subscribe };
