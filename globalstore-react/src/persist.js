@@ -13,8 +13,8 @@ export const createJSONStorage = (storage) => {
 export const persist = (createState, options) => {
   const { name, storage = createJSONStorage(localStorage) } = options;
 
-  return (set, get) => {
-    const wrappedSet = (newState) => {
+  const createWrappedSet = (set, get) => {
+    return (newState) => {
       set(newState);
 
       const currentState = get();
@@ -26,19 +26,25 @@ export const persist = (createState, options) => {
       }, {});
       storage.setItem(name, stateToSave);
     };
+  };
 
+  const restoreState = (initialState) => {
     const savedState = storage.getItem(name);
+    if (!savedState) return initialState;
 
-    const initialState = createState(wrappedSet, get);
-
-    if (savedState) {
-      Object.keys(savedState).forEach((key) => {
-        if (typeof initialState[key] !== 'function') {
-          initialState[key] = savedState[key];
-        }
-      });
-    }
+    Object.keys(savedState).forEach((key) => {
+      if (typeof initialState[key] !== 'function') {
+        initialState[key] = savedState[key];
+      }
+    });
 
     return initialState;
+  };
+
+  return (set, get) => {
+    const wrappedSet = createWrappedSet(set, get);
+    const initialState = createState(wrappedSet, get);
+
+    return restoreState(initialState);
   };
 };
