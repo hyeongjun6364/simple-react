@@ -1,0 +1,25 @@
+{
+  "name": "@hyeongjun6364/myreact",
+  "version": "1.0.0",
+  "description": "간단한 React 라이브러리",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:lib": "rollup -c",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "keywords": ["react"],
+  "author": "hyeongjun6364",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-react": "^7.28.5",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "rollup": "^4.53.3"
+  }
+}
