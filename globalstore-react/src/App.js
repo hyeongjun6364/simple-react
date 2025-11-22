@@ -1,17 +1,21 @@
-import { createStore } from './createStore';
+import { create } from './createStore';
 import InnerComponent from './InnerComponent';
+import { createJSONStorage, persist } from './persist';
 import { makeStoreHook } from './useStore';
 
-export const store = createStore((set) => ({
-  count: 0,
-  count2: 100,
-  increase: () => {
-    set((state) => ({ ...state, count: state.count + 1 }));
-  },
-  decrease: () => {
-    set((state) => ({ ...state, count: state.count - 1 }));
-  },
-}));
+export const store = create(
+  persist(
+    (set, get) => ({
+      count: 0,
+      increase: () => set((state) => ({ ...state, count: state.count + 1 })),
+      decrease: () => set((state) => ({ ...state, count: state.count - 1 })),
+    }),
+    {
+      name: 'counter-storage',
+      storage: createJSONStorage(localStorage),
+    },
+  ),
+);
 
 export const useStore = makeStoreHook(store);
 
