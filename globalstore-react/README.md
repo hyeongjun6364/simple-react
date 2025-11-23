@@ -1,4 +1,4 @@
-## 간단한 전역상태관리 구현하기
+## 간단한 전역상태관리 구현하기 v2
 Zustand의 철학을 기반으로 전역 상태 관리를 직접 구현한 학습용 라이브러리입니다.
 
 ### 🎯 프로젝트 소개
@@ -110,5 +110,40 @@ core/
   ├── persist.js            # localStorage persist
   ├── useStore.js           # React hook binding
   └── lib.js                # package export
+
+```
+
+### 🔧V1에서 발생한 문제 해결
+버전 1에서는 useStore훅에서 selector가 변경되면 렌더링 이후 구독이 되는 원리였기에 최신값이 반영되지 않을 가능성이 존재했습니다.
+
+그래서 렌더링 이후가 DOM에 반영되기 직전에 최신값을 체크해야했습니다.
+이를 리액트에서 제공하는 useSyncExternalStore훅을 이용하여 해결 할 수 있었습니다.
+
+***기존 코드***
+
+```jsx
+export function useStore(store, selector = (state) => state) {
+  const [state, setState] = useState(() => selector(store.getState()));
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      setState(selector(store.getState()));
+    });
+    return unsubscribe;
+  }, [store, selector]);
+
+  return state;
+}
+```
+
+***개선 코드***
+```jsx
+import { useSyncExternalStore } from 'react';
+
+export function makeStoreHook(store) {
+  return function useStore(selector = (state) => state) {
+    return useSyncExternalStore(store.subscribe, () => selector(store.getState()));
+  };
+}
 
 ```
