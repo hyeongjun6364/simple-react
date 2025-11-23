@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 
 export default {
-  input: 'src/core/lib.js',
+  input: 'core/lib.js',
   output: [
     {
       file: 'dist/index.js',
