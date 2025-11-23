@@ -1,7 +1,6 @@
 import { createRoot } from '../myReact/core/myReact.js';
-import { createStore } from './createStore.js';
-import { useStore } from './useStore.js';
-
+import { createStore } from './core/createStore.js';
+import { useStore } from './core/useStore.js';
 export const countStore = createStore({ count: 0 });
 
 const App = () => {

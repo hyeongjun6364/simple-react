@@ -1,5 +1,5 @@
-import { useState } from '../myReact/core/useState.js';
-import { useEffect } from '../myReact/core/useEffect.js';
+import { useState } from '../../myReact/core/useState.js';
+import { useEffect } from '../../myReact/core/useEffect.js';
 
 export function useStore(store, selector = (state) => state) {
   const [state, setState] = useState(() => selector(store.getState()));
