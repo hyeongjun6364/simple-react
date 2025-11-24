@@ -1,6 +1,6 @@
 {
   "name": "simple-myreact-hyeongjun",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "간단한 React 라이브러리",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

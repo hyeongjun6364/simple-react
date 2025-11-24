@@ -1,6 +1,6 @@
 {
   "name": "globalstore-react-hyeongjun",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "간단한 전역 상태 관리 라이브러리",
   "private": false,
   "main": "dist/index.js",  
