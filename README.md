@@ -77,5 +77,5 @@ NPM:https://www.npmjs.com/package/globalstore-react-hyeongjun
 
 버전1 설명 보기:[리드미 보러가기](./globalStore/README.md)
 
-버전2 설명 보기:[리드미 보러가기](./globalStore-react/README.md)
+버전2 설명 보기:[리드미 보러가기](./globalstore-react/README.md)
 
